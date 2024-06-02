@@ -6,6 +6,7 @@
     "checkJs": false, 
     "jsx": "react-jsx", 
     "declaration": true,
+    "declarationDir": "./src",
     "outDir": "./dist",
     "rootDir": "./src",
     "experimentalDecorators": true,
