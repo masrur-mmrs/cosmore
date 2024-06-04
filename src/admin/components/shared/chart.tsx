@@ -12,14 +12,21 @@ interface ChartProps {
 export const Chart: React.FC<ChartProps> = ({visible, rows, columns}) => {
 
   const createEmptyChartArray = (rows: number, columns: number): string[][] => {
-    return Array.from({ length: rows }, () => Array.from({ length: columns }, () => ''));
+    const result = new Array(rows);
+    for (let i = 0; i < rows; i++) {
+      result[i] = new Array(columns).fill('');
+    }
+    return result;
   };
   const [chartArray, setChartArray] = useState<string[][]>(createEmptyChartArray(rows, columns));
 
   const updateChartArray = (rowIndex: number, colIndex: number, value: string) => {
-    const updatedChartArray = [...chartArray];
-    updatedChartArray[rowIndex][colIndex] = value;
-    setChartArray(updatedChartArray);
+    setChartArray((prev) => {
+      const updatedChartArray = [...prev];
+      updatedChartArray[rowIndex] = [...updatedChartArray[rowIndex]];
+      updatedChartArray[rowIndex][colIndex] = value;
+      return updatedChartArray;
+    });
   };
 
   useEffect(() => {
@@ -28,23 +35,14 @@ export const Chart: React.FC<ChartProps> = ({visible, rows, columns}) => {
   
 
     const renderChart = () => {
-        const tableRows: JSX.Element[][] = [];
+        const tableRows: JSX.Element[][] = new Array(rows).fill(null).map(() => new Array(columns));
 
         for (let r = 0; r < rows; r++) {
-          const rowCells: JSX.Element[] = [];
-    
           for (let c = 0; c < columns; c++) {
-            // const cellValue = (chartArray[r][c])?(chartArray[r][c]):("");
-            // console.log(cellValue);
-            
-            if (r === 0) {
-                rowCells.push(<TableHead row={r} column={c} updateChartArray={updateChartArray}/>);
-            }
-            else {
-                rowCells.push(<TableData row={r} column={c} updateChartArray={updateChartArray}/>);
-            }
+            tableRows[r][c] = r === 0 ?
+              <TableHead key={`${r}-${c}`} row={r} column={c} updateChartArray={updateChartArray}/> :
+              <TableData key={`${r}-${c}`} row={r} column={c} updateChartArray={updateChartArray}/>;
           }
-          tableRows.push(rowCells);
         }
         return tableRows.map((row, rowIndex) => <tr key={`${rowIndex}-${row}`}>{row}</tr>);
     };
