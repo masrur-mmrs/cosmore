@@ -7,5 +7,7 @@ import {
 @Entity()
 export class Product extends MedusaProduct {
   @Column({default: " "})
-  customAttribute: string
+  customAttribute: string;
+  @Column({ type: 'simple-json', default: {} })
+  productDetails: Record<string, any>;
 }
