@@ -6,23 +6,20 @@ import { Chart } from "../components/shared/chart"
 import { Button } from "@medusajs/ui"
 
 
-const ProductWidget = ({ product, notify }: ProductDetailsWidgetProps) => {
+const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps) => {
   const [rows, setRows] = useState<number>(1);
   const [columns, setColumns] = useState<number>(1);
 
   const [chartVisibility, setChartVisibility] = useState<boolean>(false);
 
-  const [customValue, setCustomValue] = useState("");
   const [productDetails, setProductDetails] = useState({});
 
 
   const updateProduct = useAdminUpdateProduct(product.id)
   
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const setChartData = () => {
     updateProduct.mutate({
-      customAttribute: customValue,
       productDetails: productDetails,
     }, {
       onSuccess: () => {
@@ -46,22 +43,7 @@ const ProductWidget = ({ product, notify }: ProductDetailsWidgetProps) => {
       >
         Create Chart
       </Button>
-      <Chart visible={chartVisibility} rows={rows} columns={columns}/>
-      {/* <form>
-        <label htmlFor="customAttributeValue">Value:</label>
-        <br/>
-        <input
-        className="pt-1 px-4 pb-1 block border bg-ui-bg-field rounded-md mt-1 appearence-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover" 
-        type="text"
-        placeholder="Custom attribute"
-        value={customValue} 
-        onChange={(e)=>setCustomValue(e.target.value)} 
-        id="customAttributeValue"
-        autoComplete="off"
-        />
-        <br/>
-        <button className="bg-black text-white p-1 rounded-md" onClick={handleSubmit} type="submit">Submit</button>
-      </form> */}
+      <Chart visible={chartVisibility} rows={rows} columns={columns} setProductDetails={setProductDetails} setChartData={setChartData}/>
     </div>
   )
 }

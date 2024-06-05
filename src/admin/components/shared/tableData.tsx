@@ -6,14 +6,9 @@ interface TableDataProps {
     updateChartArray: Function;
 }
 
-export const TableData: React.FC<TableDataProps> = React.memo(
-  ({ row, column, updateChartArray }) => {
-    const handleChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        updateChartArray(row, column, e.target.value);
-      },
-      [row, column, updateChartArray]
-    );
+export const TableData: React.FC<TableDataProps> = React.memo( ({ row, column, updateChartArray }) => {
+    
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => updateChartArray(row, column, e.target.value);
 
     return (
       <td

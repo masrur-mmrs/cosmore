@@ -7,12 +7,7 @@ interface TableHeadProps {
 }
 
 export const TableHead: React.FC<TableHeadProps> = React.memo(({ row, column, updateChartArray }) => {
-    const handleChange = React.useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            updateChartArray(row, column, e.target.value);
-        },
-        [row, column, updateChartArray]
-    );
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => updateChartArray(row, column, e.target.value);
 
     return (
         <th key={`${row}-${column}`} className="bg-ui-fg-inverted-base text-center tracking-wider">
