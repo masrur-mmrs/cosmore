@@ -53,7 +53,7 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
       variant="secondary"
       onClick={()=>setChartVisibility(!chartVisibility)}
       >
-        {chartVisibility?'Change Dimensions':'Create'} Chart
+        {chartVisibility?'Change Dimensions':'Create Chart'}
       </Button>
       <Chart visible={chartVisibility} rows={rows} columns={columns} handleSetChartData={handleSetChartData}/>
     </div>

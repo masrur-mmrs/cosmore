@@ -8,6 +8,6 @@ import {
 export class Product extends MedusaProduct {
   @Column({default: " "})
   customAttribute: string;
-  @Column({ type: 'simple-json', default: {} })
+  @Column({ type: 'simple-json', default: {}})
   productDetails: Record<string, any>;
 }
