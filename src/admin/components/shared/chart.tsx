@@ -7,11 +7,10 @@ interface ChartProps {
     visible: boolean;
     rows: number;
     columns: number;
-    setProductDetails: Function;
-    setChartData: Function;
+    handleSetChartData: (chartArray: string[][]) => void;
 }
 
-export const Chart: React.FC<ChartProps> = ({visible, rows, columns, setProductDetails, setChartData}) => {
+export const Chart: React.FC<ChartProps> = ({visible, rows, columns, handleSetChartData}) => {
 
   const createEmptyChartArray = (rows: number, columns: number): string[][] => {
     const result: string[][] = new Array(rows);
@@ -65,13 +64,9 @@ export const Chart: React.FC<ChartProps> = ({visible, rows, columns, setProductD
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    chartArray.map((chartRow) => chartRow.map((chartCell) => console.log(chartCell)));
-    // if (chartArray.length > 1) {
-    //   setProductDetails({
-    //     chartArray: chartArray,
-    //   });
-    //   setChartData();
-    // } 
+    if (chartArray.length > 0) {
+      handleSetChartData(chartArray);
+    } 
   }
 
   return (
@@ -80,7 +75,13 @@ export const Chart: React.FC<ChartProps> = ({visible, rows, columns, setProductD
         <table className="rounded-md border-separate mt-2 border border-ui-border-base">
           <tbody>{renderChart()}</tbody>
         </table>
-        <button className="bg-black text-white p-1 px-4 mt-1 rounded-md" onClick={handleSubmit} type="submit">Submit Data</button>
+        <button 
+        className="bg-[#121212] text-white p-1 px-4 mt-2 rounded-md hover:bg-[#2b2b2b] active:scale-95" 
+        onClick={handleSubmit} 
+        type="submit"
+        >
+          Submit Data
+        </button>
     </form>
     ):(<></>)
   );
