@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import type { ProductDetailsWidgetProps, WidgetConfig} from "@medusajs/admin"
-import { useAdminUpdateProduct } from "medusa-react"
+import { useAdminUpdateProduct, useAdminProduct } from "medusa-react"
 import CreateTable from "../components/shared/createTable"
 import { Chart } from "../components/shared/chart"
 import { Button } from "@medusajs/ui"
 
 const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps) => {
-  // const [chartExists, setChartExists] = useState(Object.keys(product.productDetails).length > 0);
+  const {product: data} = useAdminProduct(product.id);
+  const updateProduct = useAdminUpdateProduct(product.id);
 
   const [rows, setRows] = useState<number>(1);
   const [columns, setColumns] = useState<number>(1);
@@ -16,9 +17,8 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
   const [productDetails, setProductDetails] = useState<object>(product.productDetails);
 
 
-  const updateProduct = useAdminUpdateProduct(product.id)
-
   useEffect(() => {
+    console.log(data);    
     if (productDetails) {
       setChartData(productDetails);
     };
