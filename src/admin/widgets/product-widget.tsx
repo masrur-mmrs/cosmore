@@ -6,7 +6,6 @@ import { Chart } from "../components/shared/chart"
 import { Button } from "@medusajs/ui"
 
 const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps) => {
-  const {product: data} = useAdminProduct(product.id);
   const updateProduct = useAdminUpdateProduct(product.id);
 
   const [rows, setRows] = useState<number>(1);
@@ -18,9 +17,11 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
 
 
   useEffect(() => {
-    console.log(data);    
     if (productDetails) {
       setChartData(productDetails);
+    };
+    return () => {
+      console.log(product);
     };
   }, [productDetails]);
   

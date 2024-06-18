@@ -49,6 +49,10 @@ const plugins = [
         options: {
             autoRebuild: true,
             serve: true,
+            develop: {
+                open: true,
+                path: "/app",
+            },
         },
     },
     {
