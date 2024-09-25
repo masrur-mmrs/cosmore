@@ -1,18 +1,15 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 
-class changeProduct1680013376180 implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      "ALTER TABLE \"product\"" + 
-      " ADD COLUMN \"customAttribute\" text"
-    )
-  }
+export class changeProduct1680013376180 implements MigrationInterface {
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(
+            "ALTER TABLE \"product\" ADD COLUMN IF NOT EXISTS \"customAttribute\" text"
+        )
+    }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      "ALTER TABLE \"product\" DROP COLUMN \"customAttribute\""
-    )
-  }
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(
+            "ALTER TABLE \"product\" DROP COLUMN IF EXISTS \"customAttribute\""
+        )
+    }
 }
-
-export default changeProduct1680013376180
