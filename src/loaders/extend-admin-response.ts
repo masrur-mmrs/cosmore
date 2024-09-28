@@ -4,12 +4,10 @@ export default async function () {
     )) as any
     imports.allowedAdminproductsFields = [
       ...imports.allowedAdminproductsFields,
-      "customAttribute",
       "productDetails",
     ]
     imports.defaultAdminProductsFields = [
       ...imports.defaultAdminProductsFields,
-      "customAttribute",
       "productDetail"
     ]
   }

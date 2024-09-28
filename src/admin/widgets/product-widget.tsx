@@ -5,8 +5,11 @@ import CreateTable from "../components/shared/createTable"
 import { Chart } from "../components/shared/chart"
 import { Button } from "@medusajs/ui"
 
+
 const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps) => {
   const updateProduct = useAdminUpdateProduct(product.id);
+  // const [initialDetails, setInitialDetails] = useState<object>();
+
 
   const [rows, setRows] = useState<number>(1);
   const [columns, setColumns] = useState<number>(1);
@@ -20,19 +23,21 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
     if (productDetails) {
       setChartData(productDetails);
     };
-    return () => {
-      console.log(product);
-    };
-  }, [productDetails]);
+
+    if (product.productDetails !== undefined && 'chartArray' in product.productDetails) {
+      console.log("Size Chart: ", product.productDetails.chartArray);
+    }
+  }, [productDetails, product]);
+
+  
   
 
   const setChartData = (productDetails: {}) => {
     updateProduct.mutate({
-      customAttribute: "changed",
       productDetails: productDetails,
     }, {
       onSuccess: () => {
-        notify.success("Success!", "Product details have been updated")
+        notify.success("Success!", "Size chart updated successfully")
       }
     })
   }
