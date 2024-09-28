@@ -8,7 +8,6 @@ import { Button } from "@medusajs/ui"
 
 const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps) => {
   const updateProduct = useAdminUpdateProduct(product.id);
-  // const [initialDetails, setInitialDetails] = useState<object>();
 
 
   const [rows, setRows] = useState<number>(1);
@@ -23,11 +22,12 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
     if (productDetails) {
       setChartData(productDetails);
     };
-
     if (product.productDetails !== undefined && 'chartArray' in product.productDetails) {
-      console.log("Size Chart: ", product.productDetails.chartArray);
+      setChartVisibility(true);
+      setRows(product.productDetails.chartArray.length);
+      setColumns(product.productDetails.chartArray[0].length);
     }
-  }, [productDetails, product]);
+  }, [productDetails]);
 
   
   
@@ -61,7 +61,7 @@ const ProductWidget: React.FC = ({ product, notify }: ProductDetailsWidgetProps)
       >
         {chartVisibility?'Change Dimensions':'Create Chart'}
       </Button>
-      <Chart visible={chartVisibility} rows={rows} columns={columns} handleSetChartData={handleSetChartData}/>
+      <Chart visible={chartVisibility} rows={rows} columns={columns} productDetails={productDetails} handleSetChartData={handleSetChartData}/>
     </div>
   )
 }

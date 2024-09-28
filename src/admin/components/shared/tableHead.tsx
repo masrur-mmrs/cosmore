@@ -3,10 +3,11 @@ import * as React from 'react';
 interface TableHeadProps {
     row: number;
     column: number;
+    value?: string;
     updateChartArray: Function;
 }
 
-export const TableHead: React.FC<TableHeadProps> = React.memo(({ row, column, updateChartArray }) => {
+export const TableHead: React.FC<TableHeadProps> = React.memo(({ row, column, value, updateChartArray }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => updateChartArray(row, column, e.target.value);
 
     return (
@@ -17,6 +18,7 @@ export const TableHead: React.FC<TableHeadProps> = React.memo(({ row, column, up
                 placeholder="Table Head"
                 onChange={handleChange}
                 autoComplete="off"
+                value={value}
             />
         </th>
     );
