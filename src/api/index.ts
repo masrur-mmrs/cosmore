@@ -12,11 +12,13 @@ class AdminPostProductsReq extends MedusaAdminPostProductsReq {
   
 
 class AdminPostProductsProductReq extends MedusaAdminPostProductsProductReq {
+   @IsOptional()
    @IsObject()
    productDetails: Record<string, any>;
 }
 
 class Product extends MedusaProduct {
+   @IsOptional()
    @IsObject()
    productDetails: Record<string, any>;
 }
