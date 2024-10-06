@@ -47,12 +47,9 @@ const plugins = [
         resolve: "@medusajs/admin",
         /** @type {import('@medusajs/admin').PluginOptions} */
         options: {
-            autoRebuild: true,
-            serve: true,
-            develop: {
-                open: true,
-                path: "/app",
-            },
+            autoRebuild: false,
+            outDir: 'public',
+            backend: MEDUSA_URL,
         },
     },
     {
@@ -99,13 +96,14 @@ const modules = {
     eventBus: {
         resolve: "@medusajs/event-bus-redis",
         options: {
-            redisUrl: REDIS_URL
+            redisUrl: process.env.EVENTS_REDIS_URL,
         }
     },
     cacheService: {
         resolve: "@medusajs/cache-redis",
         options: {
-            redisUrl: REDIS_URL
+            redisUrl: process.env.CACHE_REDIS_URL,
+            ttl: 60 * 60,
         }
     },
 };
@@ -128,5 +126,6 @@ module.exports = {
     modules,
     featureFlags: {
         product_categories: true,
+        order_editing: true,
     },
 };
