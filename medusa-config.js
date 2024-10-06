@@ -49,7 +49,7 @@ const plugins = [
         options: {
             autoRebuild: false,
             outDir: 'public',
-            backend: MEDUSA_URL,
+            backend: process.env.MEDUSA_BACKEND_URL,
         },
     },
     {
