@@ -7,15 +7,22 @@ interface ChartProps {
     visible: boolean;
     rows: number;
     columns: number;
+    productDetails?: object;
     handleSetChartData: (chartArray: string[][]) => void;
 }
 
-export const Chart: React.FC<ChartProps> = ({visible, rows, columns, handleSetChartData}) => {
+export const Chart: React.FC<ChartProps> = ({visible, rows, columns, productDetails, handleSetChartData}) => {
 
   const createEmptyChartArray = (rows: number, columns: number): string[][] => {
     const result: string[][] = new Array(rows);
+    const existingChartArray = productDetails["chartArray"];
+
     for (let i = 0; i < rows; i++) {
-      result[i] = new Array(columns).fill('');
+      result[i] = new Array(columns);
+      for (let j = 0; j < columns; j++) {
+        // Fill from productDetails if available, otherwise empty string
+        result[i][j] = existingChartArray?.[i]?.[j] ?? '';
+      }
     }
     return result;
   };
@@ -54,9 +61,10 @@ export const Chart: React.FC<ChartProps> = ({visible, rows, columns, handleSetCh
 
         for (let r = 0; r < rows; r++) {
           for (let c = 0; c < columns; c++) {
+            let cellValue = (chartArray.length>1)?chartArray[r][c]:'';
             tableRows[r][c] = r === 0 ?
-              <TableHead key={`${r}-${c}`} row={r} column={c} updateChartArray={updateChartArray}/> :
-              <TableData key={`${r}-${c}`} row={r} column={c} updateChartArray={updateChartArray}/>;
+              <TableHead key={`${r}-${c}`} row={r} column={c} value={cellValue} updateChartArray={updateChartArray}/> :
+              <TableData key={`${r}-${c}`} row={r} column={c} value={cellValue} updateChartArray={updateChartArray}/>;
           }
         }
         return tableRows.map((row, rowIndex) => <tr key={`${rowIndex}-${row}`}>{row}</tr>);

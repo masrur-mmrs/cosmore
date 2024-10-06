@@ -49,6 +49,10 @@ const plugins = [
         options: {
             autoRebuild: true,
             serve: true,
+            develop: {
+                open: true,
+                path: "/app",
+            },
         },
     },
     {
@@ -80,10 +84,7 @@ const plugins = [
                             "description",
                             "handle",
                             "thumbnail",
-                            "options",
-                            "collection_title",
                             "collection_handle",
-                            "images",
                         ],
                     },
                 },
@@ -95,18 +96,18 @@ const plugins = [
 ];
 
 const modules = {
-    /*eventBus: {
-      resolve: "@medusajs/event-bus-redis",
-      options: {
-        redisUrl: REDIS_URL
-      }
+    eventBus: {
+        resolve: "@medusajs/event-bus-redis",
+        options: {
+            redisUrl: REDIS_URL
+        }
     },
     cacheService: {
-      resolve: "@medusajs/cache-redis",
-      options: {
-        redisUrl: REDIS_URL
-      }
-    },*/
+        resolve: "@medusajs/cache-redis",
+        options: {
+            redisUrl: REDIS_URL
+        }
+    },
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */

@@ -3,10 +3,11 @@ import * as React from 'react';
 interface TableDataProps {
     row: number;
     column: number;
+    value?: string;
     updateChartArray: Function;
 }
 
-export const TableData: React.FC<TableDataProps> = React.memo( ({ row, column, updateChartArray }) => {
+export const TableData: React.FC<TableDataProps> = React.memo( ({ row, column, value, updateChartArray }) => {
     
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => updateChartArray(row, column, e.target.value);
 
@@ -21,6 +22,7 @@ export const TableData: React.FC<TableDataProps> = React.memo( ({ row, column, u
           placeholder="Cell"
           onChange={handleChange}
           autoComplete="off"
+          value={value}
         />
       </td>
     );
