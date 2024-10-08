@@ -490,13 +490,13 @@ const OnboardingFlow = (props: OnboardingWidgetProps) => {
   );
 };
 
-export const config: WidgetConfig = {
-  zone: [
-    "product.list.before",
-    "product.details.before",
-    "order.list.before",
-    "order.details.before",
-  ],
-};
+// export const config: WidgetConfig = {
+//   zone: [
+//     "product.list.before",
+//     "product.details.before",
+//     "order.list.before",
+//     "order.details.before",
+//   ],
+// };
 
-export default OnboardingFlow;
+// export default OnboardingFlow;

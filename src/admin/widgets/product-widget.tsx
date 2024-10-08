@@ -60,7 +60,7 @@ const ProductWidget: React.FC<ProductDetailsWidgetProps> = ({ product, notify })
 }
 
 export const config: WidgetConfig = {
-  zone: "product.details.before",
+  zone: "product.details.after",
 }
 
 export default ProductWidget
