@@ -42,6 +42,7 @@
         "medusa-file-s3": "^1.4.2",
         "medusa-fulfillment-manual": "latest",
         "medusa-interfaces": "latest",
+        "medusa-payment-cash-on-delivery": "^0.0.31",
         "medusa-payment-manual": "latest",
         "medusa-payment-stripe": "latest",
         "medusa-plugin-algolia": "^0.2.20",
