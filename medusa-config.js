@@ -37,6 +37,7 @@ const DATABASE_URL =
     const plugins = [
         `medusa-fulfillment-manual`,
         `medusa-payment-manual`,
+        // `medusa-payment-cash-on-delivery`,
         {
             resolve: `medusa-file-s3`,
             options: {
@@ -62,11 +63,6 @@ const DATABASE_URL =
             api_key: process.env.SENDGRID_API_KEY,
             from: process.env.SENDGRID_FROM,
             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
-            localization: {
-                "de-DE": { // locale key
-                    order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED,
-                },
-            },
         },
     },
 
